@@ -30,8 +30,6 @@ The repo contains two main Python files:
     ```bash
     git clone https://github.com/tamerkanak/Sentiment-Analysis.git
     ```
-
-    (Replace `tamerkanak` with your GitHub username.)
 2.  **Install required libraries:**
 
     ```bash
