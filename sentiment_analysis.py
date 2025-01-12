@@ -23,15 +23,18 @@ from sklearn.svm import SVC
 from sklearn.preprocessing import LabelEncoder
 
 # DataFrame'i yükle
+data = pd.read_csv('C:/Users/tamer/Desktop/Data Mining/review_analysis_results.csv')
+
 data = pd.read_json('C:/Users/tamer/Desktop/Data Mining/review_balanced.json')
 df = pd.DataFrame(data)
 
 # Sadece 1 ve 5 puanları filtrele
-df = df[df['stars'].isin([1, 5])].copy()
+df = df[df['sentiment'].isin(["Negatif", "Pozitif"])].copy()
 
 # Denetimli Duygu Analizi
 # 1. Veri Ön İşleme ve Etiketleme
-df['label'] = df['stars'].apply(lambda x: 'Negative' if x == 1 else 'Positive')
+df = df[(df['stars'] == 1) | (df['stars'] == 5) | (df['stars'] == 4) | (df['stars'] == 2)]
+df['label'] = df['sentiment'].apply(lambda x: 'Negative' if x == "Negatif" else 'Positive')
 
 # Türkçe stemmer'ı başlat
 stemmer = TurkishStemmer()
@@ -57,7 +60,7 @@ def preprocess_text(text):
 df['cleaned_text'] = df['text'].apply(preprocess_text)
 
 # Feature Extraction (TF-IDF Vektörizasyonu)
-vectorizer = TfidfVectorizer(max_features=5000)  # 5000 özellik kullanacağız
+vectorizer = TfidfVectorizer(max_features=10000)  # 5000 özellik kullanacağız
 X = vectorizer.fit_transform(df['cleaned_text'])  # Veriyi vektörize et
 
 # Label Encoding işlemi
