@@ -41,6 +41,11 @@ def fetch_product_links(base_url, max_pages=10):
 
     return product_links[:MAX_PRODUCTS]
 
+[
+    {"text": "Bu ürünü çok beğendim.", "stars": 5},
+    {"text": "Fena değildi.", "stars": 3}
+]
+
 def fetch_reviews_from_page(product_url, rating_value):
     """Bir ürünün belirli bir sayfasındaki yorumları ve yıldızları çeker."""
     reviews = []
